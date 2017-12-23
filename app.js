@@ -45,6 +45,20 @@ app.get("/blogs",function(req, res){
     });
 });
 
+app.get("/blogs/new", function(req, res){
+   res.render("new");
+});
+
+app.post("/blogs",function(req, res){
+    Blog.create(req.body.blog, function(err, neBlog){
+        if(err){
+            res.render("new");
+        }else{
+            res.redirect("/blogs");
+        }
+    })
+})
+
 app.listen(process.env.PORT, process.env.IP, function(req, res){
     console.log("Server has started");
 });
